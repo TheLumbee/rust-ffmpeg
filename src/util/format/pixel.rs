@@ -400,19 +400,6 @@ pub enum Pixel {
     RGBAF32BE,
     #[cfg(feature = "ffmpeg_6_0")]
     RGBAF32LE,
-
-    #[cfg(feature = "rpi")]
-    RPI,
-    #[cfg(feature = "rpi")]
-    SAND128,
-    #[cfg(feature = "rpi")]
-    SAND64_10,
-    #[cfg(feature = "rpi")]
-    SAND64_16,
-    #[cfg(feature = "rpi")]
-    RPI4_8,
-    #[cfg(feature = "rpi")]
-    RPI4_10,
 }
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -795,23 +782,12 @@ impl From<AVPixelFormat> for Pixel {
             AV_PIX_FMT_RGBAF32BE => Pixel::RGBAF32BE,
             #[cfg(feature = "ffmpeg_6_0")]
             AV_PIX_FMT_RGBAF32LE => Pixel::RGBAF32LE,
-
-            #[cfg(feature = "rpi")]
-            AV_PIX_FMT_RPI => Pixel::RPI,
-            #[cfg(feature = "rpi")]
-            AV_PIX_FMT_SAND128 => Pixel::SAND128,
-            #[cfg(feature = "rpi")]
-            AV_PIX_FMT_SAND64_10 => Pixel::SAND64_10,
-            #[cfg(feature = "rpi")]
-            AV_PIX_FMT_SAND64_16 => Pixel::SAND64_16,
-            #[cfg(feature = "rpi")]
-            AV_PIX_FMT_RPI4_8 => Pixel::RPI4_8,
-            #[cfg(feature = "rpi")]
-            AV_PIX_FMT_RPI4_10 => Pixel::RPI4_10,
+            _ => Pixel::None.into()
         }
     }
 }
 
+#[allow(unreachable_patterns)]
 impl From<Pixel> for AVPixelFormat {
     #[inline]
     fn from(value: Pixel) -> AVPixelFormat {
@@ -1208,19 +1184,6 @@ impl From<Pixel> for AVPixelFormat {
             Pixel::RGBAF32BE => AV_PIX_FMT_RGBAF32BE,
             #[cfg(feature = "ffmpeg_6_0")]
             Pixel::RGBAF32LE => AV_PIX_FMT_RGBAF32LE,
-
-            #[cfg(feature = "rpi")]
-            Pixel::RPI => AV_PIX_FMT_RPI,
-            #[cfg(feature = "rpi")]
-            Pixel::SAND128 => AV_PIX_FMT_SAND128,
-            #[cfg(feature = "rpi")]
-            Pixel::SAND64_10 => AV_PIX_FMT_SAND64_10,
-            #[cfg(feature = "rpi")]
-            Pixel::SAND64_16 => AV_PIX_FMT_SAND64_16,
-            #[cfg(feature = "rpi")]
-            Pixel::RPI4_8 => AV_PIX_FMT_RPI4_8,
-            #[cfg(feature = "rpi")]
-            Pixel::RPI4_10 => AV_PIX_FMT_RPI4_10,
         }
     }
 }
